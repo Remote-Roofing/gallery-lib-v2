@@ -3,9 +3,13 @@
 ## Todo
 
 [x] Fix main route (currently shows 404)
+
 [ ] Restore all animations available in the original repo
+
 [ ] Fix dynamic routers and update the prop handlers
+
 [ ] Add the Modal component back
+
 [ ] Add switcher for magnifier
 
 ## OG Ref
