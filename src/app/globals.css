@@ -76,3 +76,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.transform-component-module_content__FBWxo img {
+  pointer-events: all !important;
+}

@@ -4,12 +4,12 @@
   "rsc": false,
   "tailwind": {
     "config": "tailwind.config.js",
-    "css": "src/styles/globals.css",
+    "css": "src/app/globals.css",
     "baseColor": "slate",
     "cssVariables": false
   },
   "aliases": {
-    "components": "@/components/shared/shadcn",
+    "components": "@/components/ui",
     "utils": "@/lib/utils"
   }
 }
