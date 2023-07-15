@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
 import useKeypress from 'react-use-keypress'
-import type { ImageProps } from '@/types/inspection'
+import type { ImageProps } from '../types/inspection'
 import SharedModal from './sharedModal'
 
 export default function Modal({

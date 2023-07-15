@@ -14,10 +14,10 @@ import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
-import { variants } from "@/utilities/animationVariants";
-import downloadPhoto from "@/utilities/downloadPhoto";
-import { range } from "@/utilities/range";
-import type { ImageProps, SharedModalProps } from "@/types/inspection";
+import { variants } from "../utilities/animationVariants";
+import downloadPhoto from "../utilities/downloadPhoto";
+import { range } from "../utilities/range";
+import type { ImageProps, SharedModalProps } from "../types/inspection";
 import { Dot, Twitter } from "lucide-react";
 
 import {
@@ -25,7 +25,7 @@ import {
   TransformComponent,
   useControls,
 } from "react-zoom-pan-pinch";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "../components/ui/badge";
 
 export default function SharedModal({
   index,
