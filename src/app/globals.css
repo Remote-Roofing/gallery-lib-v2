@@ -25,3 +25,7 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.transform-component-module_content__FBWxo img {
+  pointer-events: all !important;
+}
