@@ -1,13 +1,59 @@
 # Gallery Lib with App Router
 
-## Todo
+### Get Started
+Requires **NextJS 13**
 
-- [x] Fix main route (currently shows 404)
+```bash
+npm install react-image-gallery
+```
+Import the package with styles (without loading the styles the library might cause errors)
 
-- [X] Restore all animations available in the original repo
+```javascript
+import { Modal } from "gallery-with-magnifier";
+import "gallery-with-magnifier/styles.css"
+```
 
-- [X] Fix dynamic routers and update the prop handlers
+### Example Usage
+```javascript
+"use client"
+import { useState } from "react"
+import { Modal } from "gallery-with-magnifier"
+import "gallery-with-magnifier/styles.css"
+import data from "./mock,ts"
 
-- [X] Add the Modal component back
+export default function Page() {
+  const [openModal, setOpenModal] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-- [ ] Add switcher for magnifier
+  return (
+    <div className="flex flex-row w-full h-[540px] gap-3 relative">
+      <div className="flex flex-col w-full h-full">
+        <span onClick={() => {
+          setCurrentSlide(4);
+          setOpenModal(true);
+        }}>Open Modal</span>
+      </div>
+      
+      {openModal && (
+        <Modal 
+          currentImage={currentSlide}
+          images={data}
+          onClose={() => {setOpenModal(false)}}
+          zoomIn={false}
+        />
+      )}
+    </div>
+  );
+}
+```
+
+# Props
+* `images`: (required) Array of objects
+  * Available Properties:
+    * `id`: ***number** 
+    * `status`: Object (optional)
+    * `image`: ***string**
+* `onClose`: (required) Void, A void for handling CloseEvents
+* `zoomIn`: (optional) Boolean, To toggle Magnifying Glass
+    * `defaultValue`: false
+* `currentImage`: Number, Id of an image from the **Images** Array
