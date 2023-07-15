@@ -1,4 +1,3 @@
-
 "use client"
 import {
   ArrowDownTrayIcon,
@@ -15,9 +14,9 @@ import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
-import { variants } from "@/utils/animationVariants";
-import downloadPhoto from "@/utils/downloadPhoto";
-import { range } from "@/utils/range";
+import { variants } from "@/utilities/animationVariants";
+import downloadPhoto from "@/utilities/downloadPhoto";
+import { range } from "@/utilities/range";
 import type { ImageProps, SharedModalProps } from "@/types/inspection";
 import { Dot, Twitter } from "lucide-react";
 
@@ -285,10 +284,10 @@ export default function SharedModal({
                   )}
                 </>
               )}
-              <div className="absolute z-50 right-0 top-5 flex items-center gap-2 p-3 text-white">
+              <div className="absolute z-50 right-0 top-5 flex items-center gap-2 p-3 text-white"> 
                 {navigation ? (
                   <a
-                    href={currentImage.image.src}
+                    href={currentImage.image}
                     className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
                     target="_blank"
                     title="Open fullsize version"
@@ -310,7 +309,7 @@ export default function SharedModal({
                 <button
                   onClick={() =>
                     downloadPhoto(
-                      currentImage.image.src,
+                      currentImage.image,
                       `${index}.jpg`
                     )
                   }

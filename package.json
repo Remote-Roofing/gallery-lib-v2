@@ -1,7 +1,7 @@
 {
-  "name": "gallery-lib-v2",
+  "name": "@smartroof/gallery",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -63,5 +63,17 @@
     "@types/google.maps": "^3.53.4",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0"
-  }
+  },
+  "description": "- [x] Fix main route (currently shows 404)",
+  "main": "src/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Remote-Roofing/gallery-lib-v2.git"
+  },
+  "author": "hooria",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Remote-Roofing/gallery-lib-v2/issues"
+  },
+  "homepage": "https://github.com/Remote-Roofing/gallery-lib-v2#readme"
 }
