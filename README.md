@@ -47,11 +47,24 @@ export default function Page() {
 }
 ```
 
+Update the next.config.js of your project with
+```bash
+/** @type {import('next').NextConfig} */
+
+const nextConfig = {
+  ...
+  transpilePackages: ["gallery-with-magnifier"]
+}
+  
+module.exports = nextConfig
+```
+
 # Props
 * `images`: (required) Array of objects
   * Available Properties:
     * `id`: ***number** 
-    * `status`: Object (optional)
+    * `status`: Object (optional) 
+      - `status: {msg: "fair", type: "fair"},`
     * `image`: ***string**
 * `onClose`: (required) Void, A void for handling CloseEvents
 * `zoomIn`: (optional) Boolean, To toggle Magnifying Glass

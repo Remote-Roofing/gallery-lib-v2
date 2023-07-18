@@ -6,8 +6,8 @@ const data = [
   {
     id: 0,
     status: {
-        msg: "good",
-        type: "success",
+        msg: "urgent",
+        type: "urgent",
     },
     image: "https://res.cloudinary.com/ds09jj0fe/image/upload/v1688535481/roof_zyyvfh.png"
   },
@@ -34,8 +34,8 @@ const data = [
   {
       id: 4,
       status: {
-          msg: "good",
-          type: "success"
+          msg: "emergency",
+          type: "emergency"
       },
       image: "https://res.cloudinary.com/ds09jj0fe/image/upload/v1688535481/roof5_hz0ruo.png"
   },

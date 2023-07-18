@@ -218,7 +218,16 @@ export default function SharedModal({
                   </TransformWrapper>
 
                   {currentImage.status ? <div className="rounded-md overflow-hidden justify-center items-center flex absolute top-7 z-50 left-14 cursor-pointer transition ease-in-out delay-150">
-                    <Badge className={`mt-2 text-md font-medium ${currentImage.status.type === "success" ? `bg-emerald-200 text-emerald-600` : currentImage.status.type === "default" ? `bg-slate-300 text-slate-800` : null} hover:opacity-90 pr-5 capitalize`}><Dot className="text-lg"/>{currentImage.status.msg}</Badge>
+                    <Badge className={
+                      `mt-2 text-md font-medium 
+                      ${currentImage.status.type === "success" ? `bg-emerald-200 text-emerald-600` : 
+                      currentImage.status.type === "fair" ? `bg-slate-300 text-slate-800` : 
+                      currentImage.status.type === "emergency" ? "bg-red-200 text-red-700" : 
+                      currentImage.status.type === "urgent" ? "bg-[#FEF2E5] text-[#E59D5A]" : 
+                      "bg-white text-black"} 
+                      hover:opacity-90 pr-5 capitalize`}>
+                        <span className="text-4xl mr-2 -mt-2 leading-3">•</span>
+                    {currentImage.status.msg}</Badge>
                   </div> : null}
                   {/* add magnifier if needed */}
                   {magEnabled ? <div
