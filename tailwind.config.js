@@ -6,6 +6,8 @@ module.exports = {
     container: {
       center: true,
       padding: '2rem',
+    },
+    extend: {
       screens: {
         '2xl': '1400px',
         narrow: { raw: '(max-aspect-ratio: 3 / 2)' },
@@ -13,8 +15,6 @@ module.exports = {
         'taller-than-854': { raw: '(min-height: 854px)' },
         short: { raw: '(max-height: 800px)' },
       },
-    },
-    extend: {
       height: {
         custom: 'calc(100vh - 77px)',
       },
