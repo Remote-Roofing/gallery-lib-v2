@@ -1,6 +1,6 @@
 import { Dialog } from '@headlessui/react'
 import { motion } from 'framer-motion'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
 import useKeypress from 'react-use-keypress'
 import type { ImageProps } from '../types/inspection'
@@ -26,8 +26,10 @@ export default function Modal({
   const [direction, setDirection] = useState(0)
   const [curIndex, setCurIndex] = useState(index)
 
+  const currentPath = usePathname();
+
   function handleClose() {
-    router.push('/')
+    router.push(currentPath + '')
     onClose()
   }
 
@@ -38,7 +40,7 @@ export default function Modal({
       setDirection(-1)
     }
     setCurIndex(newVal)
-    router.push(`/?photoId=${newVal}`)
+    router.push(`?photoId=${newVal}`)
   }
 
   useKeypress('ArrowRight', () => {
