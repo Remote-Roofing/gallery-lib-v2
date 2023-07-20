@@ -344,7 +344,7 @@ export default function SharedModal({
           )}
           {/* Bottom Nav bar */}
           {navigation && (
-            <div className="fixed short:hidden inset-x-0 bottom-0 z-40 overflow-hidden bg-gradient-to-b from-black/0 to-black/60">
+            <div className="fixed medium:z-30 short:hidden inset-x-0 bottom-0 z-40 overflow-hidden bg-gradient-to-b from-black/0 to-black/60">
               <motion.div
                 initial={false}
                 className="mx-auto mb-6 mt-6 flex aspect-[3/2] h-14"
