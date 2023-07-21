@@ -76,8 +76,13 @@ extend: {
 * `images`: (required) Array of objects
   * Available Properties:
     * `id`: ***number** 
-    * `status`: Object (optional) 
-      - `status: {msg: "fair", type: "fair"},`
+    * `status`: (optional) Object      
+      - `status: {
+          msg: "fair" (the badges render the color based on the text of this value), 
+          type: optional (string)
+        },`
+        - if the value of message is different than the type, then there are 4 type badges that can be added instead
+          `type: [default, warning, success, error]`
     * `image`: ***string**
 * `onClose`: (required) Void, A void for handling CloseEvents
 * `zoomIn`: (optional) Boolean, To toggle Magnifying Glass
