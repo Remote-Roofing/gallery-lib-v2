@@ -1,6 +1,7 @@
 "use client"
 import { useState } from "react";
 import Modal from "@/components/modal";
+import ToggleSwitchMagnify from "@/components/toggleSwitchMagnify";
 
 const data = [
   {
@@ -74,41 +75,34 @@ const moreData = [
 
 export default function HomePage() {
   const [openModal, setOpenModal] = useState(false);
-  const [openModalTwo, setOpenModalTwo] = useState(false);
-
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  const [showMag, setShowMag] = useState(false);
+
+  const handleMag = () => {
+    setShowMag(!showMag);
+    console.log("now set to", showMag);
+  }
+
   return (
-    <div className="flex flex-row w-full h-[540px] gap-3 relative max-xl:flex-col max-xl:h-auto">
-      <div className="flex flex-col w-full h-full gap-3 max-xl:flex-row max-xl:w-auto">
-        <span onClick={() => {
-          setCurrentSlide(4);
-          setOpenModal(true);
-        }}>Open Modal</span>
-
-        <span onClick={() => {
-          setCurrentSlide(0);
-          setOpenModalTwo(true);
-        }}>Open Second Modal</span>
+    <div>
+        <div className="flex flex-row w-full h-[540px] gap-3 relative max-xl:flex-col max-xl:h-auto">
+          <div className="flex flex-col w-full h-full gap-3 max-xl:flex-row max-xl:w-auto">
+            <span onClick={() => {
+              setCurrentSlide(0);
+              setOpenModal(true);
+            }}>Open Modal</span>
+          </div>
+          {openModal && (
+            <Modal 
+              currentImage={currentSlide}
+              images={data}
+              onClose={() => {setOpenModal(false)}}
+              zoomIn={showMag}
+            />
+        )}
       </div>
-      
-      {openModal && (
-        <Modal 
-          currentImage={currentSlide}
-          images={data}
-          onClose={() => {setOpenModal(false)}}
-          zoomIn={true}
-        />
-      )}
-
-      {openModalTwo && (
-        <Modal 
-          currentImage={currentSlide}
-          images={moreData}
-          onClose={() => {setOpenModalTwo(false)}}
-          zoomIn={true}
-        />
-      )}
+      <ToggleSwitchMagnify toggleHandler={handleMag} />
     </div>
   );
 }

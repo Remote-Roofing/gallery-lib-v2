@@ -80,7 +80,7 @@ export default function Modal({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       />
-      {zoomIn ? (
+      {zoomIn == true ? (
         <SharedModal
           index={curIndex}
           direction={direction}
