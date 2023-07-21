@@ -76,7 +76,7 @@ export default function SharedModal({
     const { zoomIn, zoomOut, resetTransform } = useControls();
 
     return (
-      <div className="absolute z-[100] left-1 bottom-0 flex items-center gap-2 p-3">
+      <div className="absolute z-50 left-1 bottom-0 flex items-center gap-2 p-3">
         <button
           className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
           onClick={() => {

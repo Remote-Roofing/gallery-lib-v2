@@ -75,9 +75,10 @@ export default function Modal({
         ref={overlayRef}
         as={motion.div}
         key='backdrop'
-        className='fixed inset-0 z-50 bg-black opacity-70' 
+        className='fixed inset-0 z-50 opacity-80 backdrop-blur-2xl'
+        style={{backgroundColor: 'rgba(0,0,0,0.5)'}}
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.8 }}
+        animate={{ opacity: 1 }}
       />
       {zoomIn ? (
         <SharedModal
