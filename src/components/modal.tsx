@@ -69,15 +69,15 @@ export default function Modal({
       open={false}
       onClose={handleClose}
       initialFocus={overlayRef}
-      className='fixed inset-0 z-[99] flex items-center justify-center'
+      className='fixed inset-0 z-50 flex items-center justify-center'
     >
       <Dialog.Overlay
         ref={overlayRef}
         as={motion.div}
         key='backdrop'
-        className='fixed inset-0 z-[99] bg-black/70 backdrop-blur-2xl'
+        className='fixed inset-0 z-50 bg-black opacity-70' 
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: 0.8 }}
       />
       {zoomIn ? (
         <SharedModal
