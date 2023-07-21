@@ -18,7 +18,6 @@ import "gallery-with-magnifier/styles.css"
 "use client"
 import { useState } from "react"
 import { Modal } from "gallery-with-magnifier"
-import "gallery-with-magnifier/styles.css"
 import data from "./mock,ts"
 
 export default function Page() {
@@ -57,6 +56,20 @@ const nextConfig = {
 }
   
 module.exports = nextConfig
+```
+
+Add these media queries in tailwind.config.js
+```
+extend: {
+  screens: {
+    '2xl': '1400px',
+    narrow: { raw: '(max-aspect-ratio: 3 / 2)' },
+    wide: { raw: '(min-aspect-ratio: 3 / 2)' },
+    'taller-than-854': { raw: '(min-height: 854px)' },
+    short: { raw: '(max-height: 800px)' },
+    medium: { raw: '(max-height: 1000px)' },
+  },
+},
 ```
 
 # Props
