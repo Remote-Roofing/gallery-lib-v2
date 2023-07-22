@@ -25,7 +25,7 @@ import {
   TransformComponent,
   useControls,
 } from "react-zoom-pan-pinch";
-import { Badge } from "../components/ui/badge";
+import { Badge } from "./ui/badge";
 
 export default function SharedModal({
   index,
@@ -227,7 +227,7 @@ export default function SharedModal({
                         style={{
                           marginLeft: "auto",
                           marginRight: "auto",
-                          cursor: showMagnifier ? "none" : "auto",
+                          cursor: magEnabled ? (showMagnifier ? "none" : "auto") : "auto",
                         }}
                         onMouseEnter={e => {
                           const elem = e.currentTarget;
