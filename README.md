@@ -72,6 +72,22 @@ extend: {
 },
 ```
 
+### Toggle Switch Component
+* toggleHandler: (required) Void
+
+```javascript
+<ToggleSwitchMagnify toggleHandler={handleMag} />
+
+...
+
+const [showMag, setShowMag] = useState(false);
+
+const handleMag = () => {
+  setShowMag(!showMag);
+  console.log("now set to", showMag) // testing
+}
+```
+
 # Props
 * `images`: (required) Array of objects
   * Available Properties:
