@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   ArrowDownTrayIcon,
   ArrowTopRightOnSquareIcon,
@@ -27,6 +27,25 @@ import {
 } from "react-zoom-pan-pinch";
 import { Badge } from "./ui/badge";
 
+const shimmer = (w: number, h: number) => `
+<svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient id="g">
+      <stop stop-color="#333" offset="20%" />
+      <stop stop-color="#222" offset="50%" />
+      <stop stop-color="#333" offset="70%" />
+    </linearGradient>
+  </defs>
+  <rect width="${w}" height="${h}" fill="#333" />
+  <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
+  <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
+</svg>`;
+
+const toBase64 = (str: string) =>
+  typeof window === "undefined"
+    ? Buffer.from(str).toString("base64")
+    : window.btoa(str);
+
 export default function SharedModal({
   index,
   images,
@@ -35,14 +54,13 @@ export default function SharedModal({
   navigation,
   currentPhoto,
   direction,
-  magEnabled
+  magEnabled,
 }: SharedModalProps) {
-
   const [loaded, setLoaded] = useState(false);
 
-  let filteredImages: any = images?.filter((img: ImageProps) =>
-    range(index - 15, index + 15).includes(img.id)
-  );
+  let filteredImages = images?.filter((img: ImageProps) =>
+    range(index - 15, index + 15).includes(img.id),
+  ) as any[];
 
   const imagesLength = images ? images.length : 0;
 
@@ -69,14 +87,14 @@ export default function SharedModal({
   const [zoomActive, setZoomActive] = useState(false);
 
   const [zoomPercentage, setZoomPercentage] = useState(100);
-  const [magnifierSize, ] = useState(180);
-  const [zoomLevel, ] = useState(2);
+  const [magnifierSize] = useState(180);
+  const [zoomLevel] = useState(2);
 
   const Controls = () => {
     const { zoomIn, zoomOut, resetTransform } = useControls();
 
     return (
-      <div className="absolute z-50 left-1 bottom-0 flex items-center gap-2 p-3">
+      <div className="absolute bottom-0 left-1 z-50 flex items-center gap-2 p-3">
         <button
           className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
           onClick={() => {
@@ -129,35 +147,35 @@ export default function SharedModal({
 
   const gradingColorDictionary = {
     fair: {
-      textColor: 'text-[#667085]',
-      backgroundColor: 'bg-[#E7E7EA]',
+      textColor: "text-[#667085]",
+      backgroundColor: "bg-[#E7E7EA]",
     },
     urgent: {
-      textColor: 'text-[#E59D5A]',
-      backgroundColor: 'bg-[#FEF2E5]',
+      textColor: "text-[#E59D5A]",
+      backgroundColor: "bg-[#FEF2E5]",
     },
     emergency: {
-      textColor: 'text-[#DA615D]',
-      backgroundColor: 'bg-[#F9E5E5]',
+      textColor: "text-[#DA615D]",
+      backgroundColor: "bg-[#F9E5E5]",
     },
     good: {
-      textColor: 'text-[#49945A]',
-      backgroundColor: 'bg-[#DCF4E4]',
+      textColor: "text-[#49945A]",
+      backgroundColor: "bg-[#DCF4E4]",
     },
   };
 
   const gradingTypeDictionary = {
     default: {
-      classNames: 'bg-[#E7E7EA] text-[#667085]'
+      classNames: "bg-[#E7E7EA] text-[#667085]",
     },
     warning: {
-      classNames: 'bg-[#FEF2E5] text-[#E59D5A]'
+      classNames: "bg-[#FEF2E5] text-[#E59D5A]",
     },
     error: {
-      classNames: 'bg-[#F9E5E5] text-[#DA615D]'
+      classNames: "bg-[#F9E5E5] text-[#DA615D]",
     },
     success: {
-      classNames: 'bg-[#DCF4E4] text-[#49945A]'
+      classNames: "bg-[#DCF4E4] text-[#49945A]",
     },
   };
 
@@ -183,7 +201,7 @@ export default function SharedModal({
                 initial="enter"
                 animate="center"
                 exit="exit"
-                className="absolute z-40 w-full h-full"
+                className="absolute z-40 h-full w-full"
               >
                 <div
                   style={{ position: "relative" }}
@@ -217,6 +235,13 @@ export default function SharedModal({
                         src={currentImage.image}
                         width={navigation ? 1280 : 1920}
                         height={navigation ? 853 : 1280}
+                        placeholder="blur"
+                        blurDataURL={`data:image/svg+xml;base64,${toBase64(
+                          shimmer(
+                            navigation ? 1280 : 1920,
+                            navigation ? 853 : 1280,
+                          ),
+                        )}`}
                         priority
                         alt="Next.js Conf image"
                         onLoadingComplete={() => {
@@ -227,16 +252,20 @@ export default function SharedModal({
                         style={{
                           marginLeft: "auto",
                           marginRight: "auto",
-                          cursor: magEnabled ? (showMagnifier ? "none" : "auto") : "auto",
+                          cursor: magEnabled
+                            ? showMagnifier
+                              ? "none"
+                              : "auto"
+                            : "auto",
                         }}
-                        onMouseEnter={e => {
+                        onMouseEnter={(e) => {
                           const elem = e.currentTarget;
                           const { width, height } =
                             elem.getBoundingClientRect();
                           setSize([width, height]);
                           setShowMagnifier(true);
                         }}
-                        onMouseMove={e => {
+                        onMouseMove={(e) => {
                           const elem = e.currentTarget;
                           const { top, left } = elem.getBoundingClientRect();
 
@@ -251,18 +280,42 @@ export default function SharedModal({
                     </TransformComponent>
                   </TransformWrapper>
 
-                  {currentImage.status ? <div className="rounded-md overflow-hidden justify-center items-center flex absolute top-7 z-50 left-14 cursor-pointer transition ease-in-out delay-150">
-                    <Badge className={
-                      `mt-2 text-md font-medium 
+                  {currentImage.status ? (
+                    <div className="absolute left-14 top-7 z-50 flex cursor-pointer items-center justify-center overflow-hidden rounded-md transition delay-150 ease-in-out">
+                      <Badge
+                        className={`text-md mt-2 font-medium 
                       hover:opacity-90
-                      ${currentImage.status.type ? `${gradingTypeDictionary[currentImage.status.type as keyof typeof gradingTypeDictionary]?.classNames}` : null}
-                      ${gradingColorDictionary[currentImage.status.msg as keyof typeof gradingColorDictionary] ?.backgroundColor} ${gradingColorDictionary[currentImage.status.msg as keyof typeof gradingColorDictionary]?.textColor}
-                      pr-5 capitalize`}>
-                        <span className="text-4xl mr-2 -mt-2 leading-3">•</span>
-                    {currentImage.status.msg}</Badge>
-                  </div> : null}
+                      ${
+                        currentImage.status.type
+                          ? `${
+                              gradingTypeDictionary[
+                                currentImage.status
+                                  .type as keyof typeof gradingTypeDictionary
+                              ]?.classNames
+                            }`
+                          : null
+                      }
+                      ${
+                        gradingColorDictionary[
+                          currentImage.status
+                            .msg as keyof typeof gradingColorDictionary
+                        ]?.backgroundColor
+                      } ${
+                          gradingColorDictionary[
+                            currentImage.status
+                              .msg as keyof typeof gradingColorDictionary
+                          ]?.textColor
+                        }
+                      pr-5 capitalize`}
+                      >
+                        <span className="-mt-2 mr-2 text-4xl leading-3">•</span>
+                        {currentImage.status.msg}
+                      </Badge>
+                    </div>
+                  ) : null}
                   {/* add magnifier if needed */}
-                  {magEnabled ? <div
+                  {magEnabled ? (
+                    <div
                       id="glass"
                       style={{
                         display: showMagnifier ? "" : "none",
@@ -279,11 +332,11 @@ export default function SharedModal({
                         backgroundColor: "transparent",
                         backgroundImage: `url('${currentImage.image}')`,
                         backgroundRepeat: "no-repeat",
-  
+
                         backgroundSize: `${imgWidth * zoomLevel}px ${
                           imgHeight * zoomLevel
                         }px`,
-  
+
                         backgroundPositionX: `${
                           -x * zoomLevel + magnifierSize / 2
                         }px`,
@@ -291,7 +344,8 @@ export default function SharedModal({
                           -y * zoomLevel + magnifierSize / 2
                         }px`,
                       }}
-                    ></div> : null}
+                    ></div>
+                  ) : null}
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -307,7 +361,7 @@ export default function SharedModal({
                 <>
                   {index > 0 && (
                     <button
-                      className="absolute z-50 left-3 top-[calc(50%-16px)] rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none"
+                      className="absolute left-3 top-[calc(50%-16px)] z-50 rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none"
                       style={{ transform: "translate3d(0, 0, 0)" }}
                       onClick={() => changePhotoId(index - 1)}
                     >
@@ -316,7 +370,7 @@ export default function SharedModal({
                   )}
                   {index + 1 < imagesLength && (
                     <button
-                      className="absolute z-50 right-3 top-[calc(50%-16px)] rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none"
+                      className="absolute right-3 top-[calc(50%-16px)] z-50 rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none"
                       style={{ transform: "translate3d(0, 0, 0)" }}
                       onClick={() => changePhotoId(index + 1)}
                     >
@@ -325,7 +379,7 @@ export default function SharedModal({
                   )}
                 </>
               )}
-              <div className="absolute z-50 right-0 top-5 flex items-center gap-2 p-3 text-white"> 
+              <div className="absolute right-0 top-5 z-50 flex items-center gap-2 p-3 text-white">
                 {navigation ? (
                   <a
                     href={currentImage.image}
@@ -349,10 +403,7 @@ export default function SharedModal({
                 )}
                 <button
                   onClick={() =>
-                    downloadPhoto(
-                      currentImage.image,
-                      `${index}.jpg`
-                    )
+                    downloadPhoto(currentImage.image, `${index}.jpg`)
                   }
                   className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
                   title="Download fullsize version"
@@ -360,7 +411,7 @@ export default function SharedModal({
                   <ArrowDownTrayIcon className="h-5 w-5" />
                 </button>
               </div>
-              <div className="absolute z-50 left-0 top-5 flex items-center gap-2 p-3 text-white">
+              <div className="absolute left-0 top-5 z-50 flex items-center gap-2 p-3 text-white">
                 <button
                   onClick={() => closeModal()}
                   className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
@@ -376,13 +427,13 @@ export default function SharedModal({
           )}
           {/* Bottom Nav bar */}
           {navigation && (
-            <div className="fixed medium:z-30 short:hidden inset-x-0 bottom-0 z-40 overflow-hidden bg-gradient-to-b from-black/0 to-black/60">
+            <div className="fixed inset-x-0 bottom-0 z-40 overflow-hidden bg-gradient-to-b from-black/0 to-black/60 short:hidden medium:z-30">
               <motion.div
                 initial={false}
                 className="mx-auto mb-6 mt-6 flex aspect-[3/2] h-14"
               >
                 <AnimatePresence initial={false}>
-                  {filteredImages?.map(i => (
+                  {filteredImages?.map((i) => (
                     <motion.button
                       initial={{
                         width: "0%",
