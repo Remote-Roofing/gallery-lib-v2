@@ -22,3 +22,10 @@
   background-color: rgb(0 0 0 / 0.7);
 }
 
+.bg-color-hover-badge {
+  background-color: rgb(0 0 0 / 0.5);
+}
+
+.bg-color-hover-badge:hover {
+  background-color: rgb(0 0 0 / 0.75);
+}

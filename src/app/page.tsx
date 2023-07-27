@@ -1,5 +1,5 @@
 "use client"
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Modal from "@/components/modal";
 import ToggleSwitchMagnify from "@/components/toggleSwitchMagnify";
 

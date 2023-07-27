@@ -75,7 +75,7 @@ export default function Modal({
         ref={overlayRef}
         as={motion.div}
         key='backdrop'
-        className='fixed inset-0 z-50 opacity-80 backdrop-blur-2xl'
+        className='fixed inset-0 z-50 opacity-50 backdrop-blur-md'
         style={{backgroundColor: 'rgba(0,0,0,0.5)'}}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
