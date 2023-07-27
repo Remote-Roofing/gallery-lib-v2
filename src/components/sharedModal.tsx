@@ -226,7 +226,7 @@ export default function SharedModal({
                 className="absolute z-40 h-full w-full"
               >
                 <div
-                  style={{ position: "relative", backgroundColor: "rgba(0, 0, 0, 0.5)", display: "flex", alignItems: "center", justifyContent: "center" }}
+                  style={{ position: "relative", backgroundColor: "rgba(0, 0, 0, 0.5)", display: "flex", alignItems: "flex-start", justifyContent: "center" }}
                   className="h-full w-full backdrop-blur-lg"
                   onClick={(e) => {
                     if (zoomPercentage < 200 && e.detail === 2) {
@@ -275,6 +275,8 @@ export default function SharedModal({
                           style={{
                             marginLeft: "auto",
                             marginRight: "auto",
+                            height: 680,
+                            width: "auto",
                             cursor: magEnabled
                               ? showMagnifier
                                 ? "none"
@@ -314,6 +316,8 @@ export default function SharedModal({
                         style={{
                           marginLeft: "auto",
                           marginRight: "auto",
+                          height: 680,
+                          width: "auto",
                           cursor: magEnabled
                             ? showMagnifier
                               ? "none"
@@ -326,7 +330,8 @@ export default function SharedModal({
 
                   {currentImage.status ? (
                     <div className="absolute left-14 top-7 z-50 flex cursor-pointer items-center justify-center overflow-hidden rounded-md transition delay-150 ease-in-out">
-                      <Badge
+                      {
+                        currentImage.status.msg ? <Badge
                         className={`text-md mt-2 font-medium 
                       hover:opacity-90
                       ${
@@ -354,7 +359,8 @@ export default function SharedModal({
                       >
                         <span className="mr-2">•</span>
                         {currentImage.status.msg}
-                      </Badge>
+                      </Badge> : null
+                      }
                     </div>
                   ) : null}
                   {/* add magnifier if needed */}
@@ -387,6 +393,8 @@ export default function SharedModal({
                         backgroundPositionY: `${
                           -y * zoomLevel + magnifierSize / 2
                         }px`,
+
+                        marginLeft: `${(1023 - imgWidth) / 2}px`
                       }}
                     ></div>
                   ) : null}
