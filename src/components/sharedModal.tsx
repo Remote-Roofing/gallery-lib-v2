@@ -12,7 +12,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import { variants } from "../utilities/animationVariants";
 import downloadPhoto from "../utilities/downloadPhoto";
@@ -90,6 +90,8 @@ export default function SharedModal({
   const [magnifierSize] = useState(180);
   const [zoomLevel] = useState(2);
 
+  const timerRef = useRef<any>(null);
+
   const Controls = () => {
     const { zoomIn, zoomOut, resetTransform } = useControls();
 
@@ -143,7 +145,7 @@ export default function SharedModal({
     } else {
       setShowMagnifier(true);
     }
-  });
+  }, [zoomActive]);
 
   const gradingColorDictionary = {
     fair: {
@@ -178,6 +180,26 @@ export default function SharedModal({
       classNames: "bg-[#DCF4E4] text-[#49945A]",
     },
   };
+
+
+  const handleMouseMove = (event) => {
+    const elem = event.currentTarget;
+    const { top, left } = elem.getBoundingClientRect();
+
+    const x = event.pageX - left - window.scrollX;
+    const y = event.pageY - top - window.screenY;
+    setXY([x, y]);
+
+    // Debounce the state update using setTimeout
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+    timerRef.current = setTimeout(() => {
+      setXY([x, y]);
+      timerRef.current = null;
+    }, 100);
+  };
+
 
   return (
     <MotionConfig
@@ -266,14 +288,7 @@ export default function SharedModal({
                             setSize([width, height]);
                             setShowMagnifier(true);
                           }}
-                          onMouseMove={(e) => {
-                            const elem = e.currentTarget;
-                            const { top, left } = elem.getBoundingClientRect();
-
-                            const x = e.pageX - left - window.scrollX;
-                            const y = e.pageY - top - window.screenY;
-                            setXY([x, y]);
-                          }}
+                          onMouseMove={handleMouseMove}
                           onMouseLeave={() => {
                             setShowMagnifier(false);
                           }}
