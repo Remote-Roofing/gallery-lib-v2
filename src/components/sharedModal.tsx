@@ -231,6 +231,53 @@ export default function SharedModal({
                   >
                     <Controls />
                     <TransformComponent>
+                      {magEnabled ? (
+                        <Image
+                          src={currentImage.image}
+                          width={navigation ? 1280 : 1920}
+                          height={navigation ? 853 : 1280}
+                          placeholder="blur"
+                          blurDataURL={`data:image/svg+xml;base64,${toBase64(
+                            shimmer(
+                              navigation ? 1280 : 1920,
+                              navigation ? 853 : 1280,
+                            ),
+                          )}`}
+                          priority
+                          alt="Next.js Conf image"
+                          onLoadingComplete={() => {
+                            setLoaded(true);
+                            setZoomPercentage(100);
+                          }}
+                          id="image"
+                          style={{
+                            marginLeft: "auto",
+                            marginRight: "auto",
+                            cursor: magEnabled
+                              ? showMagnifier
+                                ? "none"
+                                : "auto"
+                              : "auto",
+                          }}
+                          onMouseEnter={(e) => {
+                            const elem = e.currentTarget;
+                            const { width, height } =
+                              elem.getBoundingClientRect();
+                            setSize([width, height]);
+                            setShowMagnifier(true);
+                          }}
+                          onMouseMove={(e) => {
+                            const elem = e.currentTarget;
+                            const { top, left } = elem.getBoundingClientRect();
+
+                            const x = e.pageX - left - window.scrollX;
+                            const y = e.pageY - top - window.screenY;
+                            setXY([x, y]);
+                          }}
+                          onMouseLeave={() => {
+                            setShowMagnifier(false);
+                          }}
+                      />) : 
                       <Image
                         src={currentImage.image}
                         width={navigation ? 1280 : 1920}
@@ -258,25 +305,7 @@ export default function SharedModal({
                               : "auto"
                             : "auto",
                         }}
-                        onMouseEnter={(e) => {
-                          const elem = e.currentTarget;
-                          const { width, height } =
-                            elem.getBoundingClientRect();
-                          setSize([width, height]);
-                          setShowMagnifier(true);
-                        }}
-                        onMouseMove={(e) => {
-                          const elem = e.currentTarget;
-                          const { top, left } = elem.getBoundingClientRect();
-
-                          const x = e.pageX - left - window.scrollX;
-                          const y = e.pageY - top - window.screenY;
-                          setXY([x, y]);
-                        }}
-                        onMouseLeave={() => {
-                          setShowMagnifier(false);
-                        }}
-                      />
+                      />}
                     </TransformComponent>
                   </TransformWrapper>
 
