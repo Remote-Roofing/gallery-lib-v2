@@ -6,11 +6,11 @@ Requires **NextJS 13**
 ```bash
 npm install react-image-gallery
 ```
-Import the package with styles (without loading the styles the library might cause errors)
+Import the package, If the project doesnt have tailwindCSS installed import the styles as well
 
 ```javascript
 import { Modal } from "gallery-with-magnifier";
-import "gallery-with-magnifier/styles.css"
+import "gallery-with-magnifier/styles.css" // Optional
 ```
 
 ### Example Usage
@@ -58,8 +58,15 @@ const nextConfig = {
 module.exports = nextConfig
 ```
 
-Add these media queries in tailwind.config.js
+Add these media queries and reference the library path in tailwind.config.js
 ```
+content: [
+  ...
+  './node_modules/gallery-with-magnifier/**/*.{html,js,ts,tsx}'
+],
+
+...
+
 extend: {
   screens: {
     '2xl': '1400px',

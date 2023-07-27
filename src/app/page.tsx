@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Modal from "@/components/modal";
 import ToggleSwitchMagnify from "@/components/toggleSwitchMagnify";
 
@@ -84,10 +84,14 @@ export default function HomePage() {
     console.log("now set to", showMag);
   }
 
+  const closeHandler = () => {
+    setOpenModal(false);
+  }
+
   return (
     <div>
         <div className="flex flex-row w-full h-[540px] gap-3 relative max-xl:flex-col max-xl:h-auto">
-          <div className="flex flex-col w-full h-full gap-3 max-xl:flex-row max-xl:w-auto">
+          <div className="fixed bg-red-300 flex flex-col z-50 gap-3 max-xl:flex-row max-xl:w-auto">
             <span onClick={() => {
               setCurrentSlide(0);
               setOpenModal(true);
@@ -97,7 +101,7 @@ export default function HomePage() {
             <Modal 
               currentImage={currentSlide}
               images={moreData}
-              onClose={() => {setOpenModal(false)}}
+              onClose={closeHandler}
               zoomIn={showMag}
             />
         )}
