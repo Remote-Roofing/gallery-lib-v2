@@ -96,7 +96,7 @@ export default function HomePage() {
           {openModal && (
             <Modal 
               currentImage={currentSlide}
-              images={data}
+              images={moreData}
               onClose={() => {setOpenModal(false)}}
               zoomIn={showMag}
             />

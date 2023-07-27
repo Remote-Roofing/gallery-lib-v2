@@ -96,7 +96,7 @@ export default function SharedModal({
     return (
       <div className="absolute bottom-0 left-1 z-50 flex items-center gap-2 p-3">
         <button
-          className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
+          className="rounded-full bg-black bg-opacity-50 hover:bg-opacity-75 p-2 text-white/75 backdrop-blur-lg transition hover:text-white"
           onClick={() => {
             zoomIn(1);
             if (zoomPercentage < 200) {
@@ -108,7 +108,7 @@ export default function SharedModal({
           <MagnifyingGlassPlusIcon className="h-6 w-6" />
         </button>
         <button
-          className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
+          className="rounded-full bg-black bg-opacity-50 hover:bg-opacity-75 p-2 text-white/75 backdrop-blur-lg transition hover:text-white"
           onClick={() => {
             zoomOut(1);
             if (zoomPercentage > 100) {
@@ -120,7 +120,7 @@ export default function SharedModal({
           <MagnifyingGlassMinusIcon className="h-6 w-6" />
         </button>
         <button
-          className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
+          className="rounded-full bg-black bg-opacity-50 hover:bg-opacity-75 p-2 text-white/75 backdrop-blur-lg transition hover:text-white"
           onClick={() => {
             resetTransform();
             setZoomActive(false);
@@ -130,7 +130,7 @@ export default function SharedModal({
         >
           <ViewColumnsIcon className="h-6 w-6" />
         </button>
-        <h1 className="text-md rounded-full bg-black/50 p-2 px-4 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white">
+        <h1 className="text-md rounded-full bg-black bg-opacity-50 hover:bg-opacity-75 p-2 px-4 text-white/75 backdrop-blur-lg transition hover:text-white">
           {zoomPercentage}%
         </h1>
       </div>
@@ -204,8 +204,8 @@ export default function SharedModal({
                 className="absolute z-40 h-full w-full"
               >
                 <div
-                  style={{ position: "relative" }}
-                  className="h-full w-full"
+                  style={{ position: "relative", backgroundColor: "rgba(0, 0, 0, 0.5)", display: "flex", alignItems: "center", justifyContent: "center" }}
+                  className="h-full w-full backdrop-blur-lg"
                   onClick={(e) => {
                     if (zoomPercentage < 200 && e.detail === 2) {
                       setZoomPercentage(zoomPercentage + 25);
@@ -308,7 +308,7 @@ export default function SharedModal({
                         }
                       pr-5 capitalize`}
                       >
-                        <span className="-mt-2 mr-2 text-4xl leading-3">•</span>
+                        <span className="mr-2">•</span>
                         {currentImage.status.msg}
                       </Badge>
                     </div>
@@ -361,7 +361,7 @@ export default function SharedModal({
                 <>
                   {index > 0 && (
                     <button
-                      className="absolute left-3 top-[calc(50%-16px)] z-50 rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none"
+                      className="absolute left-3 top-[calc(50%-16px)] z-50 rounded-full bg-black bg-opacity-50 hover:bg-opacity-75 p-3 text-white/75 backdrop-blur-lg transition hover:text-white focus:outline-none"
                       style={{ transform: "translate3d(0, 0, 0)" }}
                       onClick={() => changePhotoId(index - 1)}
                     >
@@ -370,7 +370,7 @@ export default function SharedModal({
                   )}
                   {index + 1 < imagesLength && (
                     <button
-                      className="absolute right-3 top-[calc(50%-16px)] z-50 rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none"
+                      className="absolute right-3 top-[calc(50%-16px)] z-50 rounded-full bg-black bg-opacity-50 hover:bg-opacity-75 p-3 text-white/75 backdrop-blur-lg transition hover:text-white focus:outline-none"
                       style={{ transform: "translate3d(0, 0, 0)" }}
                       onClick={() => changePhotoId(index + 1)}
                     >
@@ -383,7 +383,7 @@ export default function SharedModal({
                 {navigation ? (
                   <a
                     href={currentImage.image}
-                    className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
+                    className="rounded-full bg-black bg-opacity-50 hover:bg-opacity-75 p-2 text-white/75 backdrop-blur-lg transition hover:text-white"
                     target="_blank"
                     title="Open fullsize version"
                     rel="noreferrer"
@@ -393,7 +393,7 @@ export default function SharedModal({
                 ) : (
                   <a
                     href={`https://twitter.com/intent/tweet?text=Check%20out%20this%20pic%20from%20Next.js%20Conf!%0A%0Ahttps://nextjsconf-pics.vercel.app/p/${index}`}
-                    className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
+                    className="rounded-full bg-black bg-opacity-50 hover:bg-opacity-75 p-2 text-white/75 backdrop-blur-lg transition hover:text-white"
                     target="_blank"
                     title="Open fullsize version"
                     rel="noreferrer"
@@ -405,7 +405,7 @@ export default function SharedModal({
                   onClick={() =>
                     downloadPhoto(currentImage.image, `${index}.jpg`)
                   }
-                  className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
+                  className="rounded-full bg-black bg-opacity-50 hover:bg-opacity-75 p-2 text-white/75 backdrop-blur-lg transition hover:text-white"
                   title="Download fullsize version"
                 >
                   <ArrowDownTrayIcon className="h-5 w-5" />
@@ -414,7 +414,7 @@ export default function SharedModal({
               <div className="absolute left-0 top-5 z-50 flex items-center gap-2 p-3 text-white">
                 <button
                   onClick={() => closeModal()}
-                  className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
+                  className="rounded-full bg-black bg-opacity-50 hover:bg-opacity-75 p-2 text-white/75 backdrop-blur-lg transition hover:text-white"
                 >
                   {navigation ? (
                     <XMarkIcon className="h-5 w-5" />
@@ -427,7 +427,7 @@ export default function SharedModal({
           )}
           {/* Bottom Nav bar */}
           {navigation && (
-            <div className="fixed inset-x-0 bottom-0 z-40 overflow-hidden bg-gradient-to-b from-black/0 to-black/60 short:hidden medium:z-30">
+            <div className="fixed inset-x-0 bottom-0 z-40 overflow-hidden bg-gradient-to-b from-[rgba(0,0,0,0)_0%] to-from-[rgba(0,0,0,.6)_60%] short:hidden medium:z-30">
               <motion.div
                 initial={false}
                 className="mx-auto mb-6 mt-6 flex aspect-[3/2] h-14"
