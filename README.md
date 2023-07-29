@@ -64,9 +64,7 @@ content: [
   ...
   './node_modules/gallery-with-magnifier/**/*.{html,js,ts,tsx}'
 ],
-
 ...
-
 extend: {
   screens: {
     '2xl': '1400px',
