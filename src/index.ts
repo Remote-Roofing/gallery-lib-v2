@@ -6,5 +6,6 @@ import { variants } from "./utilities/animationVariants";
 import downloadPhoto from "./utilities/downloadPhoto";
 import { range } from "./utilities/range";
 import { useLastViewedPhoto } from "./utilities/useLastViewedPhoto";
+import { getScrollPosition } from "./utilities/getScrollPosition";
 
-export { Modal, SharedModal, ToggleSwitchMagnify, variants, downloadPhoto, range, useLastViewedPhoto };
+export { Modal, SharedModal, ToggleSwitchMagnify, variants, downloadPhoto, range, useLastViewedPhoto, getScrollPosition };

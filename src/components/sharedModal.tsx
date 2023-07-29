@@ -12,13 +12,13 @@ import {
 } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import { variants } from "../utilities/animationVariants";
 import downloadPhoto from "../utilities/downloadPhoto";
 import { range } from "../utilities/range";
 import type { ImageProps, SharedModalProps } from "../types/inspection";
-import { Dot, Twitter } from "lucide-react";
+import { Twitter } from "lucide-react";
 
 import {
   TransformWrapper,
@@ -465,7 +465,10 @@ export default function SharedModal({
               </div>
               <div className="absolute left-0 top-5 z-50 flex items-center gap-2 p-3 text-white">
                 <button
-                  onClick={() => closeModal()}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    closeModal();
+                  }}
                   className="rounded-full bg-color-hover-badge p-2 text-white/75 backdrop-blur-lg transition hover:text-white"
                 >
                   {navigation ? (

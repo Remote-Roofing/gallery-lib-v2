@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import useKeypress from 'react-use-keypress';
 import type { ImageProps } from '../types/inspection';
 import SharedModal from './sharedModal';
+import { getScrollPosition } from '@/utilities/getScrollPosition';
 
 export default function Modal({
   images,
@@ -27,14 +28,25 @@ export default function Modal({
 
   const pathname = usePathname();
 
-  // useEffect(() => {
-  //   // just for debugging
-  //   console.log({ curIndex });
-  // }, [curIndex]);
+  //Handling scroll position when opening the dialog or changing images
+  useEffect(() => {
+    const scrollPosition = getScrollPosition();
+
+    // Navigate to the desired page, preserving the scroll position
+    router.push(`${pathname}/?photoId=${curIndex}`, { scroll: false });
+    document.body.style.overflow = 'hidden';
+
+    // After the push, reset the scroll position to the previously stored position
+    setTimeout(() => {
+      window.scrollTo(0, scrollPosition);
+    }, 0);
+  }, [curIndex, pathname, router])
 
   function handleClose() {
-    router.push(pathname);
     onClose();
+    router.replace(pathname, {scroll: false});
+
+    document.body.style.overflow = 'auto';
   }
 
   function changePhotoId(newVal: number) {
@@ -44,7 +56,10 @@ export default function Modal({
       setDirection(-1);
     }
     setCurIndex(newVal);
-    router.push(`${pathname}/?photoId=${newVal}`);
+
+    //using replace instead of push to prevent the page from resetting scroll offset
+    router.replace(`${pathname}/?photoId=${newVal}`);
+    return false; // prevent default
   }
 
   useKeypress('ArrowRight', () => {
