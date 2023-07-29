@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import useKeypress from 'react-use-keypress';
 import type { ImageProps } from '../types/inspection';
 import SharedModal from './sharedModal';
-import { getScrollPosition } from '@/utilities/getScrollPosition';
+import { getScrollPosition } from '../utilities/getScrollPosition';
 
 export default function Modal({
   images,
