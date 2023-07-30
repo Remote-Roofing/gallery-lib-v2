@@ -331,7 +331,7 @@ export default function SharedModal({
                   {currentImage.status ? (
                     <div className="absolute left-14 top-7 z-50 flex cursor-pointer items-center justify-center overflow-hidden rounded-md transition delay-150 ease-in-out">
                       {
-                        currentImage.status.msg ? <Badge
+                        currentImage.status.msg && currentImage.status.msg !== "---" ? <Badge
                         className={`text-md mt-2 font-medium 
                       hover:opacity-90
                       ${
