@@ -31,6 +31,13 @@ const data = [
       },
       image: "https://res.cloudinary.com/ds09jj0fe/image/upload/v1690464203/750938_rtwxr5.png"
   },
+  {
+      id: 4,
+      status: {
+        msg: "",
+      },
+      image: "https://res.cloudinary.com/ds09jj0fe/image/upload/v1690464203/750938_rtwxr5.png"
+  },
 ];
 
 export default function HomePage() {

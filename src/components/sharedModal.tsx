@@ -59,7 +59,7 @@ export default function SharedModal({
   const [loaded, setLoaded] = useState(false);
 
   let filteredImages = images?.filter((img: ImageProps) =>
-    range(index - 15, index + 15).includes(img.id),
+    range(index - 150, index + 150).includes(img.id),
   ) as any[];
 
   const imagesLength = images ? images.length : 0;
@@ -492,18 +492,18 @@ export default function SharedModal({
                     <motion.button
                       initial={{
                         width: "0%",
-                        x: `${Math.max((index - 1) * -100, 15 * -100)}%`,
+                        x: `${Math.max((index - 1) * -100, 150 * -100)}%`,
                       }}
                       animate={{
                         scale: i.id === index ? 1.25 : 1,
                         width: "100%",
-                        x: `${Math.max(index * -100, 15 * -100)}%`,
+                        x: `${Math.max(index * -100, 150 * -100)}%`,
                       }}
                       exit={{ width: "0%" }}
                       onClick={() => changePhotoId(i.id)}
                       key={i.id}
                       className={`
-                        [&:nth-child(16)]:hidden
+                        [&:nth-child(150)]:hidden
                         ${
                           i.id === index
                             ? "z-20 rounded-md shadow shadow-black/50"
