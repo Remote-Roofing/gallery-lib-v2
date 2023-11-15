@@ -55,6 +55,8 @@ export default function SharedModal({
   currentPhoto,
   direction,
   magEnabled,
+  enableDownload = true,
+  enableFullScreen = true,
 }: SharedModalProps) {
   const [loaded, setLoaded] = useState(false);
 
@@ -432,7 +434,7 @@ export default function SharedModal({
                 </>
               )}
               <div className="absolute right-0 top-5 z-50 flex items-center gap-2 p-3 text-white">
-                {navigation ? (
+                {enableFullScreen && navigation && (
                   <a
                     href={currentImage.image}
                     className="rounded-full bg-color-hover-badge p-2 text-white/75 backdrop-blur-lg transition hover:text-white"
@@ -442,7 +444,9 @@ export default function SharedModal({
                   >
                     <ArrowTopRightOnSquareIcon className="h-5 w-5" />
                   </a>
-                ) : (
+                )}
+
+                {enableFullScreen && !navigation && (
                   <a
                     href={`https://twitter.com/intent/tweet?text=Check%20out%20this%20pic%20from%20Next.js%20Conf!%0A%0Ahttps://nextjsconf-pics.vercel.app/p/${index}`}
                     className="rounded-full bg-color-hover-badge p-2 text-white/75 backdrop-blur-lg transition hover:text-white"
@@ -453,15 +457,18 @@ export default function SharedModal({
                     <Twitter className="h-5 w-5" />
                   </a>
                 )}
-                <button
-                  onClick={() =>
-                    downloadPhoto(currentImage.image, `${index}.jpg`)
-                  }
-                  className="rounded-full bg-color-hover-badge p-2 text-white/75 backdrop-blur-lg transition hover:text-white"
-                  title="Download fullsize version"
-                >
-                  <ArrowDownTrayIcon className="h-5 w-5" />
-                </button>
+
+                {enableDownload && (
+                  <button
+                    onClick={() =>
+                      downloadPhoto(currentImage.image, `${index}.jpg`)
+                    }
+                    className="rounded-full bg-color-hover-badge p-2 text-white/75 backdrop-blur-lg transition hover:text-white"
+                    title="Download fullsize version"
+                  >
+                    <ArrowDownTrayIcon className="h-5 w-5" />
+                  </button>
+                )}
               </div>
               <div className="absolute left-0 top-5 z-50 flex items-center gap-2 p-3 text-white">
                 <button

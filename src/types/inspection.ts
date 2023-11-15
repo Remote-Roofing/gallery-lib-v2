@@ -14,4 +14,6 @@ export interface SharedModalProps {
   navigation: boolean
   direction?: number
   magEnabled: boolean
+  enableDownload?: boolean
+  enableFullScreen?: boolean
 }

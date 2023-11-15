@@ -12,11 +12,15 @@ export default function Modal({
   onClose,
   zoomIn,
   currentImage,
+  enableDownload,
+  enableFullScreen
 }: {
   images: ImageProps[];
   onClose: () => void;
   zoomIn?: boolean;
   currentImage?: number;
+  enableDownload?: boolean
+  enableFullScreen?: boolean
 }) {
   let overlayRef = useRef<any>();
   const router = useRouter();
@@ -104,6 +108,8 @@ export default function Modal({
           closeModal={handleClose}
           navigation={true}
           magEnabled={true}
+          enableDownload={enableDownload}
+          enableFullScreen={enableFullScreen}
         />
       ) : (
         <SharedModal
@@ -114,6 +120,8 @@ export default function Modal({
           closeModal={handleClose}
           navigation={true}
           magEnabled={false}
+          enableDownload={enableDownload}
+          enableFullScreen={enableFullScreen}
         />
       )}
     </Dialog>
